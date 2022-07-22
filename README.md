@@ -5,7 +5,7 @@ This class will automatically disable Gravity Forms' built-in styles. It require
 
 By default, most fields will be stacked vertically on mobile (date and time fields are not).
 
-### Usage:
+### Usage
 
 Drop this file somewhere into your theme's `functions.php`. Then require and initialize it:
 
@@ -14,3 +14,7 @@ require_once get_template_directory() . '/path/to/class/class-gravityformsbootst
 
 new GravityFormsBootstrap();
 ```
+
+### Notes
+
+This intentionally does not provide vertical spacing between fields, or padding on the form itself, since this will vary much more often among different use cases.
