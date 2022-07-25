@@ -39,6 +39,7 @@ class GravityFormsBootstrap {
 			add_filter( 'gform_field_content', [ $this, 'set_up_name_container_grid' ], 10, 6 );
 			add_filter( 'gform_field_content', [ $this, 'set_up_date_time_container_grid' ], 10, 6 );
 			add_filter( 'gform_field_content', [ $this, 'set_up_address_container_grid' ], 10, 6 );
+			add_filter( 'gform_submit_button', [ $this, 'modify_button' ], 10, 2 );
 		}
 	}
 
@@ -344,6 +345,16 @@ class GravityFormsBootstrap {
 			}
 		}
 
+		return $this->save_html_from_domdocument( $dom );
+	}
+
+	public function modify_button( $button, $form ) {
+		$dom = $this->create_dom_context_from_fragment( $button );
+		/** @var DOMElement $button */
+		$button   = $dom->getElementsByTagName( 'input' )->item( 0 );
+		$classes  = $button->getAttribute( 'class' );
+		$classes .= ' btn btn-primary';
+		$button->setAttribute( 'class', trim( $classes ) );
 		return $this->save_html_from_domdocument( $dom );
 	}
 
